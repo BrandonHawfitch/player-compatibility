@@ -1,0 +1,186 @@
+[
+  {
+    "name": "Andrew",
+    "genrePreferences": {
+      "fantasy": 7,
+      "horror": 6,
+      "mythic": 6,
+      "scifi": 4,
+      "nautical": 3,
+      "comedy": 1,
+      "mystery": 6,
+      "fairyTale": 2,
+      "wuxia": 2
+    },
+    "gameplayAspectPreferences": {
+      "acting": 1,
+      "exploring": 3,
+      "instigating": 6,
+      "fighting": 5,
+      "optimizing": 2,
+      "problemSolving": 7,
+      "storytelling": 4
+    }
+  },
+  {
+    "name": "Brad",
+    "genrePreferences": {
+      "fantasy": 5,
+      "horror": 4,
+      "mythic": 7,
+      "scifi": 3,
+      "nautical": 5,
+      "comedy": 1,
+      "mystery": 6,
+      "fairyTale": 3,
+      "wuxia": 6
+    },
+    "gameplayAspectPreferences": {
+      "acting": 2,
+      "exploring": 3,
+      "instigating": 4,
+      "fighting": 5,
+      "optimizing": 1,
+      "problemSolving": 6,
+      "storytelling": 7
+    }
+  },
+  {
+    "name": "Caid",
+    "genrePreferences": {
+      "fantasy": 6,
+      "horror": 5,
+      "mythic": 7,
+      "scifi": 6,
+      "nautical": 1,
+      "comedy": 4,
+      "mystery": 5,
+      "fairyTale": 2,
+      "wuxia": 4
+    },
+    "gameplayAspectPreferences": {
+      "acting": 7,
+      "exploring": 5,
+      "instigating": 3,
+      "fighting": 2,
+      "optimizing": 1,
+      "problemSolving": 6,
+      "storytelling": 4
+    }
+  },
+  {
+    "name": "Caytlin",
+    "genrePreferences": {
+      "fantasy": 7,
+      "horror": 6,
+      "mythic": 7,
+      "scifi": 6,
+      "nautical": 4,
+      "comedy": 1,
+      "mystery": 6,
+      "fairyTale": 5,
+      "wuxia": 4
+    },
+    "gameplayAspectPreferences": {
+      "acting": 4,
+      "exploring": 7,
+      "instigating": 3,
+      "fighting": 2,
+      "optimizing": 1,
+      "problemSolving": 5,
+      "storytelling": 6
+    }
+  },
+  {
+    "name": "Chavez",
+    "genrePreferences": {
+      "fantasy": 2,
+      "horror": 3,
+      "mythic": 1,
+      "scifi": 4,
+      "nautical": 5,
+      "comedy": 6,
+      "mystery": 7,
+      "fairyTale": 1,
+      "wuxia": 1
+    },
+    "gameplayAspectPreferences": {
+      "acting": 2,
+      "exploring": 5,
+      "instigating": 4,
+      "fighting": 3,
+      "optimizing": 1,
+      "problemSolving": 6,
+      "storytelling": 7
+    }
+  },
+  {
+    "name": "Madison",
+    "genrePreferences": {
+      "fantasy": 3,
+      "horror": 5,
+      "mythic": 7,
+      "scifi": 5,
+      "nautical": 7,
+      "comedy": 4,
+      "mystery": 2,
+      "fairyTale": 7,
+      "wuxia": 6
+    },
+    "gameplayAspectPreferences": {
+      "acting": 5,
+      "exploring": 6,
+      "instigating": 4,
+      "fighting": 3,
+      "optimizing": 1,
+      "problemSolving": 2,
+      "storytelling": 7
+    }
+  },
+  {
+    "name": "Mikey",
+    "genrePreferences": {
+      "fantasy": 4,
+      "horror": 7,
+      "mythic": 7,
+      "scifi": 3,
+      "nautical": 5,
+      "comedy": 5,
+      "mystery": 5,
+      "fairyTale": 3,
+      "wuxia": 7
+    },
+    "gameplayAspectPreferences": {
+      "acting": 1,
+      "exploring": 6,
+      "instigating": 7,
+      "fighting": 2,
+      "optimizing": 3,
+      "problemSolving": 4,
+      "storytelling": 5
+    }
+  },
+  {
+    "name": "Nathan",
+    "genrePreferences": {
+      "fantasy": 7,
+      "horror": 7,
+      "mythic": 7,
+      "scifi": 4,
+      "nautical": 1,
+      "comedy": 1,
+      "mystery": 1,
+      "fairyTale": 4,
+      "wuxia": 4
+    },
+    "gameplayAspectPreferences": {
+      "acting": 6,
+      "exploring": 3,
+      "instigating": 1,
+      "fighting": 7,
+      "optimizing": 5,
+      "problemSolving": 2,
+      "storytelling": 4
+    }
+  }
+]
