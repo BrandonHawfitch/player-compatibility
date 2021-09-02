@@ -10,18 +10,67 @@ export class Player {
     this.gameplayAspectPreferences = new GameplayAspectPreferences();
   }
 
-  public getCompatibilityScore(player: Player): number {
-    const genreCompat = this.genrePreferences.getCompatibility(
-      player.genrePreferences
+  public static getGenreCompatibilityScore(
+    playerA: Player,
+    playerB: Player
+  ): number {
+    const genreCompat = playerA.genrePreferences.getCompatibility(
+      playerB.genrePreferences
     );
-    const aspectCompat = this.gameplayAspectPreferences.getCompatibility(
-      player.gameplayAspectPreferences
+    return genreCompat;
+  }
+
+  public static getGameplayAspectCompatibilityScore(
+    playerA: Player,
+    playerB: Player
+  ): number {
+    const aspectCompat = playerA.gameplayAspectPreferences.getCompatibility(
+      playerB.gameplayAspectPreferences
     );
-    // console.log('Comparing ' + this.name + ' and ' + player.name);
-    // console.log('Genre Compat: ' + genreCompat);
-    // console.log('Aspect Compat: ' + aspectCompat);
+    return aspectCompat;
+  }
+
+  public static getCumulativeCompatibilityScore(
+    playerA: Player,
+    playerB: Player
+  ): number {
+    const genreCompat = Player.getGenreCompatibilityScore(playerA, playerB);
+    const aspectCompat = Player.getGameplayAspectCompatibilityScore(
+      playerA,
+      playerB
+    );
     const totalCompat = 0.5 * genreCompat + 0.5 * aspectCompat;
     return totalCompat;
+  }
+
+  public static getGenreCompatibilityString(
+    playerA: Player,
+    playerB: Player
+  ): string {
+    const genreCompat = Player.getGenreCompatibilityScore(playerA, playerB);
+    return (genreCompat * 100).toFixed(2).padStart(7) + '%';
+  }
+
+  public static getGameplayAspectCompatibilityString(
+    playerA: Player,
+    playerB: Player
+  ): string {
+    const aspectCompat = Player.getGameplayAspectCompatibilityScore(
+      playerA,
+      playerB
+    );
+    return (aspectCompat * 100).toFixed(2).padStart(7) + '%';
+  }
+
+  public static getCumulativeCompatibilityString(
+    playerA: Player,
+    playerB: Player
+  ): string {
+    const totalCompat = Player.getCumulativeCompatibilityScore(
+      playerA,
+      playerB
+    );
+    return (totalCompat * 100).toFixed(2).padStart(7) + '%';
   }
 
   public setGenrePreferences(pref: GenrePreferences) {

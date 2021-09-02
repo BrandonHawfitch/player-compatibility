@@ -23,8 +23,6 @@ export class GenrePreferences {
   public getAbsoluteDifferenceSum(pref: GenrePreferences): number {
     let differenceSum = 0;
 
-    // const genres = Object.getOwnPropertyNames(this);
-
     this.getGenres().forEach((genre) => {
       if (pref.hasOwnProperty(genre) && this.hasOwnProperty(genre)) {
         differenceSum += Math.abs(
@@ -32,14 +30,6 @@ export class GenrePreferences {
         );
       }
     });
-
-    // for (const genre of genres) {
-    //   if (pref.hasOwnProperty(genre) && this.hasOwnProperty(genre)) {
-    //     differenceSum += Math.abs(
-    //       (this[genre] as number) - (pref[genre] as number)
-    //     );
-    //   }
-    // }
 
     return differenceSum;
   }
@@ -52,11 +42,9 @@ export class GenrePreferences {
     for (const genre of genres) {
       if (pref.hasOwnProperty(genre) && this.hasOwnProperty(genre)) {
         numberOfCategories += 1;
-        // console.log('Genre ' + genre);
       }
     }
 
-    // console.log(numberOfCategories);
     const maxDifSum = numberOfCategories * this.getMaxDifference();
 
     return maxDifSum;
@@ -65,9 +53,6 @@ export class GenrePreferences {
   public getCompatibility(pref: GenrePreferences): number {
     const absDif = this.getAbsoluteDifferenceSum(pref);
     const maxDifSum = this.getMaximumDifferenceSum(pref);
-
-    // console.log('Abs dif: ' + absDif);
-    // console.log('Max dif: ' + maxDifSum);
 
     return 1 - absDif / maxDifSum;
   }

@@ -13,16 +13,8 @@ export class GameplayAspectPreferences {
     return Object.keys(this) as (keyof GameplayAspectPreferences)[];
   }
 
-  // private getValue(key: string): number {
-  //   if (this.hasOwnProperty(key)) {
-  //     return this[key as keyof this];
-  //   }
-  // }
-
   public getDifferenceRootSum(pref: GameplayAspectPreferences): number {
     let difRootSum = 0;
-
-    // const aspects = Object.getOwnPropertyNames(this);
 
     this.getAspects().forEach((aspect) => {
       if (pref.hasOwnProperty(aspect) && this.hasOwnProperty(aspect)) {
@@ -35,24 +27,6 @@ export class GameplayAspectPreferences {
       }
     });
 
-    // for (const aspect of this.getAspects()) {
-    //   if (pref.hasOwnProperty(aspect) && this.hasOwnProperty(aspect)) {
-    //     const dif = Math.abs(this[aspect] - pref[aspect]);
-    //     const difRoot = Math.sqrt(dif);
-
-    //     difRootSum += difRoot;
-    //   }
-    // }
-
-    // for (const aspect of aspects) {
-    //   if (pref.hasOwnProperty(aspect) && this.hasOwnProperty(aspect)) {
-    //     const dif = Math.abs(this[aspect] - pref[aspect]);
-    //     const difRoot = Math.sqrt(dif);
-
-    //     difRootSum += difRoot;
-    //   }
-    // }
-
     return difRootSum;
   }
 
@@ -64,7 +38,6 @@ export class GameplayAspectPreferences {
         numberOfCategories += 1;
       }
     }
-    // console.log('Number of categories: ' + numberOfCategories);
 
     const maxDifRootSum = Math.sqrt(
       numberOfCategories *
@@ -76,9 +49,6 @@ export class GameplayAspectPreferences {
   public getCompatibility(pref: GameplayAspectPreferences): number {
     const difRootSum = this.getDifferenceRootSum(pref);
     const maxDifRootSum = this.getMaximumDifferenceRootSum(pref);
-
-    // console.log('Dif root sum: ' + difRootSum);
-    // console.log('Max dif root sum: ' + maxDifRootSum);
 
     return 1 - difRootSum / maxDifRootSum;
   }

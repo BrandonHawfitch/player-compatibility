@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { GameplayAspectPreferences } from './entities/gameplayAspectPreferences';
 import { GenrePreferences } from './entities/genrePreferences';
 import { Player } from './entities/player';
+import { AppState } from './store/app.reducer';
+import * as AuthActions from './auth/store/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,36 +13,37 @@ import { Player } from './entities/player';
 })
 export class AppComponent implements OnInit {
   title = 'player-compatibility';
+  public players: Player[] = [];
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    let players: Array<Player> = [];
-    fetch('../assets/players.json')
-      .then((response) => response.json())
-      .then((objects: Player[]) => {
-        // console.log(objects);
-        objects.forEach((e) => {
-          // console.log(e);
-          let player = new Player(e.name);
-          player.setGameplayAspectPreferences(
-            Object.assign(
-              new GameplayAspectPreferences(),
-              e.gameplayAspectPreferences
-            )
-          );
-          player.setGenrePreferences(
-            Object.assign(new GenrePreferences(), e.genrePreferences)
-          );
-          players.push(player);
-        });
-        // Object.assign(players, json as Player[]);
-        // console.log(json as Player[]);
-        // players = json as Player[];
-        // console.log(players);
-        // console.log(players[0].getCompatibilityScore(players[1]));
-        this.printTable(players);
-      });
+    this.store.dispatch(new AuthActions.AutoLogin());
+    // fetch('../assets/players.json')
+    //   .then((response) => response.json())
+    //   .then((objects: Player[]) => {
+    //     // console.log(objects);
+    //     objects.forEach((e) => {
+    //       // console.log(e);
+    //       let player = new Player(e.name);
+    //       player.setGameplayAspectPreferences(
+    //         Object.assign(
+    //           new GameplayAspectPreferences(),
+    //           e.gameplayAspectPreferences
+    //         )
+    //       );
+    //       player.setGenrePreferences(
+    //         Object.assign(new GenrePreferences(), e.genrePreferences)
+    //       );
+    //       this.players.push(player);
+    //     });
+    //     // Object.assign(players, json as Player[]);
+    //     // console.log(json as Player[]);
+    //     // players = json as Player[];
+    //     // console.log(players);
+    //     // console.log(players[0].getCompatibilityScore(players[1]));
+    //     this.printTable(this.players);
+    //   });
   }
 
   private printTable(players: Player[]) {
@@ -52,9 +56,10 @@ export class AppComponent implements OnInit {
 
       for (let j = 7; j >= 0; j--) {
         const playerB = players[j];
-        const fixedCompat = (playerA.getCompatibilityScore(playerB) * 100)
-          .toFixed(2)
-          .padStart(7);
+        const fixedCompat = Player.getCumulativeCompatibilityString(
+          playerA,
+          playerB
+        );
         row += fixedCompat + '|';
       }
       table += row + '\n';

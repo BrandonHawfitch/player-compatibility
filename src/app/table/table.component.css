@@ -1,0 +1,12 @@
+caption {
+  text-align: center;
+  font-weight: bold;
+  font-style: italic;
+  color: rgb(68, 85, 136);
+  font-size: large;
+}
+table {
+  table-layout: fixed;
+  width: max-content;
+  margin: auto;
+}

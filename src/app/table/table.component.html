@@ -1,0 +1,21 @@
+<table class="table table-striped table-sm table-bordered">
+  <caption>
+    {{
+      title
+    }}
+  </caption>
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let playerA of players">{{ playerA.name }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let playerB of players">
+      <th>{{ playerB.name }}</th>
+      <td *ngFor="let playerA of players">
+        {{ comparison(playerA, playerB) }}
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,25 @@
+<div class="col-md-4">
+  <app-single-comparison
+    [players]="players"
+    title="Genre Comparison"
+  ></app-single-comparison>
+</div>
+<div class="col-md-8">
+  <app-table
+    [players]="players"
+    [comparison]="genreComparisonString"
+    title="Genre Compatibility"
+  ></app-table>
+  <hr />
+  <app-table
+    [players]="players"
+    [comparison]="gameplayAspectComparisonString"
+    title="Gameplay Aspect Compatibility"
+  ></app-table>
+  <hr />
+  <app-table
+    [players]="players"
+    [comparison]="cumulativeComparisonString"
+    title="Cumulative Compatibility"
+  ></app-table>
+</div>

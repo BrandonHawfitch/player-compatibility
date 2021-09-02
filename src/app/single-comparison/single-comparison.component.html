@@ -1,0 +1,39 @@
+<table class="table table-striped table-sm table-bordered">
+  <caption>
+    {{
+      title
+    }}
+  </caption>
+  <thead>
+    <tr>
+      <th></th>
+      <th class="dropdown" appDropdown>
+        <a class="dropdown-toggle" role="button">
+          {{ playerA ? playerA.name : "Player A" }}<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li *ngFor="let player of players">
+            <a style="cursor: pointer" (click)="onSelectPlayerA(player)">
+              {{ player.name }}
+            </a>
+          </li>
+        </ul>
+      </th>
+      <th class="dropdown" appDropdown>
+        <a class="dropdown-toggle" role="button">
+          {{ playerB ? playerB.name : "Player B" }}<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li *ngFor="let player of players">
+            <a style="cursor: pointer" (click)="onSelectPlayerB(player)">
+              {{ player.name }}
+            </a>
+          </li>
+        </ul>
+      </th>
+    </tr>
+  </thead>
+  <tbody *ngIf="playerA && playerB">
+    <tr *ngFor=""></tr>
+  </tbody>
+</table>
