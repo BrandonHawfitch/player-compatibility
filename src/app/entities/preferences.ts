@@ -45,12 +45,13 @@ export abstract class Scale {
 
   public getCategory(catB: Category): Category {
     const nameB = catB.name;
+    let catX = null;
     this.categories.forEach((catA: Category) => {
       if (catA.name === nameB) {
-        return catA;
+        catX = catA;
       }
     });
-    return null;
+    return catX;
   }
 
   public getNumberOfSharedCategories(scale: Scale): number {
