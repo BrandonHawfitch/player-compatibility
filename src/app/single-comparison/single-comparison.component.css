@@ -7,5 +7,6 @@ caption {
 }
 table {
   table-layout: fixed;
+  width: 50%;
   margin: auto;
 }

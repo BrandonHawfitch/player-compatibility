@@ -1,83 +1,70 @@
-import { GenrePreferences } from './genrePreferences';
-import { GameplayAspectPreferences } from './gameplayAspectPreferences';
+import { Quality, Ranking, Rating, Scale } from './preferences';
 
 export class Player {
-  public genrePreferences: GenrePreferences;
-  public gameplayAspectPreferences: GameplayAspectPreferences;
+  public preferences: Scale[] = [];
 
-  constructor(public name: string) {
-    this.genrePreferences = new GenrePreferences();
-    this.gameplayAspectPreferences = new GameplayAspectPreferences();
+  constructor(public name: string) {}
+
+  public getCompatibilityScore(quality: Quality, playerB: Player): number {
+    const scaleA = this.getScale(quality);
+    const scaleB = playerB.getScale(quality);
+    if (scaleA && scaleB) {
+      return scaleA.getCompatibility(scaleB);
+    }
+    return null;
   }
 
-  public static getGenreCompatibilityScore(
+  public static getCompatibilityScore(
+    quality: Quality,
     playerA: Player,
     playerB: Player
   ): number {
-    const genreCompat = playerA.genrePreferences.getCompatibility(
-      playerB.genrePreferences
-    );
-    return genreCompat;
+    const scaleA = playerA.getScale(quality);
+    const scaleB = playerB.getScale(quality);
+    if (scaleA && scaleB) {
+      return scaleA.getCompatibility(scaleB);
+    }
+    return null;
   }
 
-  public static getGameplayAspectCompatibilityScore(
-    playerA: Player,
-    playerB: Player
-  ): number {
-    const aspectCompat = playerA.gameplayAspectPreferences.getCompatibility(
-      playerB.gameplayAspectPreferences
-    );
-    return aspectCompat;
+  public getScale(quality: Quality): Scale {
+    let result = null;
+    this.preferences.forEach((scale: Scale) => {
+      if (quality === scale.quality) {
+        result = scale;
+      }
+    });
+    return result;
+  }
+
+  public getCumulativeCompatibilityScore(playerB: Player): number {
+    let totalCompat = 0;
+    this.preferences.forEach((scale) => {
+      const quality = scale.quality;
+      const scaleA = this.getScale(quality);
+      const scaleB = playerB.getScale(quality);
+      if (scaleA && scaleB) {
+        totalCompat +=
+          scaleA.getCompatibility(scaleB) / this.preferences.length;
+      }
+    });
+    return totalCompat;
   }
 
   public static getCumulativeCompatibilityScore(
     playerA: Player,
     playerB: Player
   ): number {
-    const genreCompat = Player.getGenreCompatibilityScore(playerA, playerB);
-    const aspectCompat = Player.getGameplayAspectCompatibilityScore(
-      playerA,
-      playerB
-    );
-    const totalCompat = 0.5 * genreCompat + 0.5 * aspectCompat;
+    let totalCompat = 0;
+    playerA.preferences.forEach((scale) => {
+      const quality = scale.quality;
+      const scaleA = playerA.getScale(quality);
+      const scaleB = playerB.getScale(quality);
+      if (scaleA && scaleB) {
+        totalCompat +=
+          scaleA.getCompatibility(scaleB) / playerA.preferences.length;
+      }
+    });
     return totalCompat;
-  }
-
-  public static getGenreCompatibilityString(
-    playerA: Player,
-    playerB: Player
-  ): string {
-    const genreCompat = Player.getGenreCompatibilityScore(playerA, playerB);
-    return (genreCompat * 100).toFixed(2).padStart(7) + '%';
-  }
-
-  public static getGameplayAspectCompatibilityString(
-    playerA: Player,
-    playerB: Player
-  ): string {
-    const aspectCompat = Player.getGameplayAspectCompatibilityScore(
-      playerA,
-      playerB
-    );
-    return (aspectCompat * 100).toFixed(2).padStart(7) + '%';
-  }
-
-  public static getCumulativeCompatibilityString(
-    playerA: Player,
-    playerB: Player
-  ): string {
-    const totalCompat = Player.getCumulativeCompatibilityScore(
-      playerA,
-      playerB
-    );
-    return (totalCompat * 100).toFixed(2).padStart(7) + '%';
-  }
-
-  public setGenrePreferences(pref: GenrePreferences) {
-    this.genrePreferences = pref;
-  }
-
-  public setGameplayAspectPreferences(pref: GameplayAspectPreferences) {
-    this.gameplayAspectPreferences = pref;
   }
 }

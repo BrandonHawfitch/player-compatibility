@@ -1,25 +1,21 @@
-<div class="col-md-4">
-  <app-single-comparison
-    [players]="players"
-    title="Genre Comparison"
-  ></app-single-comparison>
+<div class="row" *ngFor="let quality of qualities">
+  <div class="col-md-6">
+    <app-single-comparison
+      [players]="players"
+      [quality]="quality"
+    ></app-single-comparison>
+  </div>
+  <div class="col-md-6">
+    <app-table
+      [players]="players"
+      [comparison]="getComparison(quality)"
+      [title]="quality + ' Compatibility'"
+    ></app-table>
+  </div>
 </div>
-<div class="col-md-8">
-  <app-table
-    [players]="players"
-    [comparison]="genreComparisonString"
-    title="Genre Compatibility"
-  ></app-table>
-  <hr />
-  <app-table
-    [players]="players"
-    [comparison]="gameplayAspectComparisonString"
-    title="Gameplay Aspect Compatibility"
-  ></app-table>
-  <hr />
-  <app-table
-    [players]="players"
-    [comparison]="cumulativeComparisonString"
-    title="Cumulative Compatibility"
-  ></app-table>
-</div>
+<hr />
+<app-table
+  [players]="players"
+  [comparison]="getCumulativeComparison()"
+  title="Cumulative Compatibility"
+></app-table>

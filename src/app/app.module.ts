@@ -16,6 +16,7 @@ import { CompatibilityComponent } from './compatibility/compatibility.component'
 import { ProfileComponent } from './profile/profile.component';
 import { SingleComparisonComponent } from './single-comparison/single-comparison.component';
 import { SharedModule } from './shared/shared.module';
+import { TableDataFormatDirective } from './table/tableDataFormat.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
     CompatibilityComponent,
     ProfileComponent,
     SingleComparisonComponent,
+    TableDataFormatDirective,
   ],
   imports: [
     BrowserModule,

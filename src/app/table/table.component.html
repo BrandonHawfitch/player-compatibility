@@ -7,15 +7,16 @@
   <thead>
     <tr>
       <th></th>
-      <th *ngFor="let playerA of players">{{ playerA.name }}</th>
+      <th *ngFor="let player of players">{{ player.name }}</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let playerB of players">
-      <th>{{ playerB.name }}</th>
-      <td *ngFor="let playerA of players">
-        {{ comparison(playerA, playerB) }}
-      </td>
+    <tr *ngFor="let playerA of players">
+      <th>{{ playerA.name }}</th>
+      <td
+        *ngFor="let playerB of players"
+        [tableDataFormat]="comparison(playerA, playerB)"
+      ></td>
     </tr>
   </tbody>
 </table>

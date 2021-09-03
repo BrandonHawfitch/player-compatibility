@@ -1,4 +1,12 @@
 /**
+ * The qualities that can be used to analyze
+ */
+export enum Quality {
+  genre = 'Genre',
+  gameplayAspect = 'Gameplay Aspect',
+}
+
+/**
  * Any category
  */
 export class Category {
@@ -7,8 +15,12 @@ export class Category {
 
 /**
  * Any system of defining a relation between categories
+ * A specific implementation of a Scale is a set of Preferences
  */
 export abstract class Scale {
+  // The quality that the categories are being compared against
+  public quality: Quality;
+  // The individual categories that possess assigned values
   public categories: Category[] = [];
 
   /**
@@ -64,11 +76,16 @@ export abstract class Scale {
     });
     return numCategories;
   }
+
+  public addCategory(cat: Category): void {
+    this.categories.push(cat);
+  }
 }
 
 export class Ranking extends Scale {
-  constructor(max: number) {
+  constructor(quality: Quality, max: number = 7) {
     super(max);
+    this.quality = quality;
   }
 
   public getDifference(cat1: Category, cat2: Category): number {
@@ -89,8 +106,9 @@ export class Rating extends Scale {
     return this.max - this.min;
   }
 
-  constructor(max: number) {
+  constructor(quality: Quality, max: number = 7) {
     super(max);
+    this.quality = quality;
   }
 
   public getDifference(cat1: Category, cat2: Category): number {

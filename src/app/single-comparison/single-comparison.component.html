@@ -33,7 +33,19 @@
       </th>
     </tr>
   </thead>
-  <tbody *ngIf="playerA && playerB">
-    <tr *ngFor=""></tr>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <th>{{ category.name }}</th>
+      <td>
+        {{
+          playerA ? playerA.getScale(quality).getCategory(category).value : ""
+        }}
+      </td>
+      <td>
+        {{
+          playerB ? playerB.getScale(quality).getCategory(category).value : ""
+        }}
+      </td>
+    </tr>
   </tbody>
 </table>

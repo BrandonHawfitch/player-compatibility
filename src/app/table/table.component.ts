@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { GameplayAspectPreferences } from '../entities/gameplayAspectPreferences';
-import { GenrePreferences } from '../entities/genrePreferences';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Player } from '../entities/player';
+import { Quality } from '../entities/preferences';
 
 @Component({
   selector: 'app-table',
@@ -13,7 +12,7 @@ export class TableComponent implements OnInit {
   public players: Player[] = [];
 
   @Input()
-  public comparison: (playerA: Player, playerB: Player) => string;
+  public comparison: (playerA: Player, playerB: Player) => number;
 
   @Input()
   public title: string = '';

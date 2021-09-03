@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GameplayAspectPreferences } from './entities/gameplayAspectPreferences';
-import { GenrePreferences } from './entities/genrePreferences';
 import { Player } from './entities/player';
 import { AppState } from './store/app.reducer';
 import * as AuthActions from './auth/store/auth.actions';
@@ -46,31 +44,31 @@ export class AppComponent implements OnInit {
     //   });
   }
 
-  private printTable(players: Player[]) {
-    let table = ''.padEnd(players.length * 9, '_') + '\n';
-    for (let i = 0; i < players.length; i++) {
-      let row = '|';
+  // private printTable(players: Player[]) {
+  //   let table = ''.padEnd(players.length * 9, '_') + '\n';
+  //   for (let i = 0; i < players.length; i++) {
+  //     let row = '|';
 
-      const playerA = players[i];
-      row += playerA.name.padEnd(8) + '|';
+  //     const playerA = players[i];
+  //     row += playerA.name.padEnd(8) + '|';
 
-      for (let j = 7; j >= 0; j--) {
-        const playerB = players[j];
-        const fixedCompat = Player.getCumulativeCompatibilityString(
-          playerA,
-          playerB
-        );
-        row += fixedCompat + '|';
-      }
-      table += row + '\n';
-    }
-    let finalRow = '|'.padEnd(9) + '|';
-    for (let i = players.length - 1; i >= 0; i--) {
-      const player = players[i];
-      finalRow += player.name.padEnd(7) + '|';
-    }
-    table += finalRow;
+  //     for (let j = 7; j >= 0; j--) {
+  //       const playerB = players[j];
+  //       const fixedCompat = Player.getCumulativeCompatibilityString(
+  //         playerA,
+  //         playerB
+  //       );
+  //       row += fixedCompat + '|';
+  //     }
+  //     table += row + '\n';
+  //   }
+  //   let finalRow = '|'.padEnd(9) + '|';
+  //   for (let i = players.length - 1; i >= 0; i--) {
+  //     const player = players[i];
+  //     finalRow += player.name.padEnd(7) + '|';
+  //   }
+  //   table += finalRow;
 
-    console.log(table);
-  }
+  //   console.log(table);
+  // }
 }
