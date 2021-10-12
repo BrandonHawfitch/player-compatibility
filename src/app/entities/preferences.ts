@@ -88,8 +88,8 @@ export class Ranking extends Scale {
     this.category = category;
   }
 
-  public getDifference(cat1: Item, cat2: Item): number {
-    const absDif = Math.abs(cat1.value - cat2.value);
+  public getDifference(item1: Item, item2: Item): number {
+    const absDif = Math.abs(item1.value - item2.value);
     const difRoot = Math.sqrt(absDif);
     return difRoot;
   }
@@ -98,6 +98,34 @@ export class Ranking extends Scale {
     const n = this.getNumberOfSharedItems(scale);
     const maxDifSum = Math.sqrt(n * Math.floor(0.5 * n * n));
     return maxDifSum;
+  }
+
+  public addItem(item: Item): void {
+    super.addItem(item);
+    this.updateOrder();
+  }
+
+  /**
+   * Modifies the value of each item within the ranking to reflect its place in the array
+   */
+  public updateValues(): void {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i];
+      item.value = i + 1;
+    }
+  }
+
+  /**
+   * Modifies the position of each item within the ranking to reflect its value
+   */
+  public updateOrder(): void {
+    const temp = [];
+    for (const item of this.items) {
+      if (item) {
+        temp[item.value - 1] = item;
+      }
+    }
+    this.items = temp;
   }
 }
 

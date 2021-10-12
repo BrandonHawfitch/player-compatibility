@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Item } from '../entities/preferences';
+import { Category, Item, Ranking } from '../entities/preferences';
 
 @Component({
   selector: 'app-preferences',
@@ -15,15 +15,16 @@ export class PreferencesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.control = new FormControl([
-      new Item('Acting', 1),
-      new Item('Exploring', 2),
-      new Item('Fighting', 3),
-      new Item('Instigating', 4),
-      new Item('Optimizing', 5),
-      new Item('Problem Solving', 6),
-      new Item('Storytelling', 7),
-    ]);
+    let ranking = new Ranking(Category.gameplayAspect, 7);
+    ranking.addItem(new Item('Acting', 1));
+    ranking.addItem(new Item('Exploring', 2));
+    ranking.addItem(new Item('Fighting', 3));
+    ranking.addItem(new Item('Instigating', 4));
+    ranking.addItem(new Item('Optimizing', 5));
+    ranking.addItem(new Item('Problem Solving', 6));
+    ranking.addItem(new Item('Storytelling', 7));
+
+    this.control = new FormControl(ranking);
   }
 
   onSubmit() {

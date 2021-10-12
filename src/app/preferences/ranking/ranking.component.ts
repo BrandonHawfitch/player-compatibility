@@ -21,12 +21,10 @@ import { Item, Ranking } from 'src/app/entities/preferences';
     },
   ],
 })
-export class RankingComponent implements ControlValueAccessor, Validator {
+export class RankingComponent implements ControlValueAccessor {
   ranking: Ranking;
 
-  items: Item[];
-
-  onChange = (items) => {};
+  onChange = (ranking) => {};
 
   onTouched = () => {};
 
@@ -34,8 +32,8 @@ export class RankingComponent implements ControlValueAccessor, Validator {
 
   disabled = false;
 
-  writeValue(items: Item[]): void {
-    this.items = items;
+  writeValue(ranking: Ranking): void {
+    this.ranking = ranking;
   }
 
   registerOnChange(onChange: any): void {
@@ -50,17 +48,16 @@ export class RankingComponent implements ControlValueAccessor, Validator {
     this.disabled = isDisabled;
   }
 
-  validate(control: AbstractControl): ValidationErrors | null {
-    const items = control.value;
-
-    throw new Error('Method not implemented.');
-  }
-
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.ranking.items,
+      event.previousIndex,
+      event.currentIndex
+    );
     const modified = event.previousIndex !== event.currentIndex;
     if (modified) {
-      this.onChange(this.items);
+      this.ranking.updateValues();
+      this.onChange(this.ranking);
       if (!this.touched) {
         this.touched = true;
         this.onTouched();
