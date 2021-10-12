@@ -17,6 +17,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { SingleComparisonComponent } from './single-comparison/single-comparison.component';
 import { SharedModule } from './shared/shared.module';
 import { TableDataFormatDirective } from './table/tableDataFormat.directive';
+import { PreferencesComponent } from './preferences/preferences.component';
+import { RankingComponent } from './preferences/ranking/ranking.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { TableDataFormatDirective } from './table/tableDataFormat.directive';
     ProfileComponent,
     SingleComparisonComponent,
     TableDataFormatDirective,
+    PreferencesComponent,
+    RankingComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { TableDataFormatDirective } from './table/tableDataFormat.directive';
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([AuthEffects]),
     SharedModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

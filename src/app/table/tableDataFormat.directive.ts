@@ -12,7 +12,6 @@ export class TableDataFormatDirective {
   set tableDataFormat(percent: number) {
     const percentString = (percent * 100).toFixed(2).padStart(7) + '%';
     this.element.nativeElement.innerText = percentString;
-    console.log(this.element.nativeElement.style);
     let color = this.midColor;
     if (percent < 0.5) {
       color = this.minColor.getGradient(this.midColor, percent * 2);
