@@ -1,8 +1,17 @@
+table,
+th,
+td {
+  border: solid 1px #ccc;
+}
+
+th {
+  font-size: large;
+  padding: 10px;
+}
+
 .example-box {
   padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -14,7 +23,6 @@
 
 .index-box {
   padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   flex-direction: row;
   align-items: center;
@@ -47,14 +55,6 @@
 
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.example-box:last-child {
-  border: none;
-}
-
-.index-box:last-child {
-  border: none;
 }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {

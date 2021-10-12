@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../entities/player';
-import { Category, Quality, Ranking, Rating } from '../entities/preferences';
+import { Item, Category, Ranking, Rating } from '../entities/preferences';
 
 @Component({
   selector: 'app-compatibility',
@@ -9,7 +9,7 @@ import { Category, Quality, Ranking, Rating } from '../entities/preferences';
 })
 export class CompatibilityComponent implements OnInit {
   public players: Player[] = [];
-  public qualities: Quality[] = [Quality.gameplayAspect, Quality.genre];
+  public categories: Category[] = [Category.gameplayAspect, Category.genre];
 
   constructor() {}
 
@@ -19,31 +19,33 @@ export class CompatibilityComponent implements OnInit {
       .then((objects: UserData[]) => {
         objects.forEach((playerObject) => {
           let player = new Player(playerObject.name);
-          const gameplayAspectPreferences = new Ranking(Quality.gameplayAspect);
-          const genrePreferences = new Rating(Quality.genre);
-          for (const category in playerObject.gameplayAspectPreferences) {
+          const gameplayAspectPreferences = new Ranking(
+            Category.gameplayAspect
+          );
+          const genrePreferences = new Rating(Category.genre);
+          for (const item in playerObject.gameplayAspectPreferences) {
             if (
               Object.prototype.hasOwnProperty.call(
                 playerObject.gameplayAspectPreferences,
-                category
+                item
               )
             ) {
               const value: number =
-                playerObject.gameplayAspectPreferences[category];
-              const cat = new Category(category, value);
-              gameplayAspectPreferences.addCategory(cat);
+                playerObject.gameplayAspectPreferences[item];
+              const cat = new Item(item, value);
+              gameplayAspectPreferences.addItem(cat);
             }
           }
-          for (const category in playerObject.genrePreferences) {
+          for (const item in playerObject.genrePreferences) {
             if (
               Object.prototype.hasOwnProperty.call(
                 playerObject.genrePreferences,
-                category
+                item
               )
             ) {
-              const value: number = playerObject.genrePreferences[category];
-              const cat = new Category(category, value);
-              genrePreferences.addCategory(cat);
+              const value: number = playerObject.genrePreferences[item];
+              const cat = new Item(item, value);
+              genrePreferences.addItem(cat);
             }
           }
           player.preferences.push(gameplayAspectPreferences);
@@ -53,9 +55,9 @@ export class CompatibilityComponent implements OnInit {
       });
   }
 
-  public getComparison(quality: Quality) {
+  public getComparison(category: Category) {
     let comparison: (playerA: Player, playerB: Player) => number =
-      Player.getCompatibilityScore.bind(null, quality);
+      Player.getCompatibilityScore.bind(null, category);
     return comparison;
   }
 

@@ -1,14 +1,10 @@
-<div class="ranking-list row">
-  <div class="col-md-2">
-    <div class="index-box" *ngFor="let field of fields; let i = index">
-      {{ i + 1 }}
-    </div>
-  </div>
-  <div class="col-md-10">
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let field of fields" cdkDrag>
-        {{ field }}
-      </div>
-    </div>
-  </div>
-</div>
+<table cdkDropList (cdkDropListDropped)="drop($event)" style="width: 100%">
+  <thead>
+    <th style="width: 10%">Rank</th>
+    <th style="width: 90%">Field</th>
+  </thead>
+  <tr *ngFor="let item of items; let i = index">
+    <td class="index-box">{{ i + 1 }}</td>
+    <td class="example-box" cdkDrag>{{ item }}</td>
+  </tr>
+</table>

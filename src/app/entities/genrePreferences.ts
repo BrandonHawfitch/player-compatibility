@@ -35,17 +35,17 @@ export class GenrePreferences {
   }
 
   public getMaximumDifferenceSum(pref: GenrePreferences): number {
-    let numberOfCategories = 0;
+    let numberOfItems = 0;
 
     const genres = Object.getOwnPropertyNames(this);
 
     for (const genre of genres) {
       if (pref.hasOwnProperty(genre) && this.hasOwnProperty(genre)) {
-        numberOfCategories += 1;
+        numberOfItems += 1;
       }
     }
 
-    const maxDifSum = numberOfCategories * this.getMaxDifference();
+    const maxDifSum = numberOfItems * this.getMaxDifference();
 
     return maxDifSum;
   }

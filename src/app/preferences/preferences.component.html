@@ -1,6 +1,17 @@
 <div class="col-md-4"></div>
 <div class="col-md-4">
-  <h1 style="text-align: center">Preferences</h1>
-  <app-ranking></app-ranking>
+  <h1 style="text-align: center">My Preferences</h1>
+  <app-preference>
+    <p>
+      Drag and drop these different Gameplay Aspects into the order you most
+      prefer them. For example, if your most preferred (#1) gameplay aspect is
+      Exploring, you would place that in the Rank 1 location.
+    </p>
+    <app-ranking [formControl]="control"></app-ranking>
+  </app-preference>
+  <app-preference>
+    <p>Enter your name</p>
+    <input [formControl]="control" type="text" />
+  </app-preference>
 </div>
 <div class="col-md-4"></div>

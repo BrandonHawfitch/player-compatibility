@@ -31,17 +31,16 @@ export class GameplayAspectPreferences {
   }
 
   public getMaximumDifferenceRootSum(pref: GameplayAspectPreferences): number {
-    let numberOfCategories = 0;
+    let numberOfItems = 0;
     const aspects = Object.getOwnPropertyNames(this);
     for (const aspect of aspects) {
       if (pref.hasOwnProperty(aspect) && this.hasOwnProperty(aspect)) {
-        numberOfCategories += 1;
+        numberOfItems += 1;
       }
     }
 
     const maxDifRootSum = Math.sqrt(
-      numberOfCategories *
-        Math.floor(0.5 * numberOfCategories * numberOfCategories)
+      numberOfItems * Math.floor(0.5 * numberOfItems * numberOfItems)
     );
     return maxDifRootSum;
   }

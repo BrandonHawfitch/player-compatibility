@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player } from '../entities/player';
-import { Category, Quality } from '../entities/preferences';
+import { Item, Category } from '../entities/preferences';
 
 @Component({
   selector: 'app-single-comparison',
@@ -14,9 +14,9 @@ export class SingleComparisonComponent implements OnInit {
   public players: Player[] = [];
 
   @Input()
-  public quality;
+  public category;
 
-  public categories: Set<Category> = new Set();
+  public items: Set<Item> = new Set();
 
   public playerA: Player = null;
   public playerB: Player = null;
@@ -24,33 +24,33 @@ export class SingleComparisonComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.title = this.quality + ' Comparison';
+    this.title = this.category + ' Comparison';
   }
 
   onSelectPlayerA(player: Player) {
     this.playerA = player;
-    this.updateCategories();
+    this.updateItems();
   }
   onSelectPlayerB(player: Player) {
     this.playerB = player;
-    this.updateCategories();
+    this.updateItems();
   }
 
-  private updateCategories() {
-    this.categories.clear();
-    const categoryNames = new Set<string>();
+  private updateItems() {
+    this.items.clear();
+    const itemNames = new Set<string>();
     if (this.playerA) {
-      this.playerA.getScale(this.quality).categories.forEach((category) => {
-        categoryNames.add(category.name);
+      this.playerA.getScale(this.category).items.forEach((item) => {
+        itemNames.add(item.name);
       });
     }
     if (this.playerB) {
-      this.playerB.getScale(this.quality).categories.forEach((category) => {
-        categoryNames.add(category.name);
+      this.playerB.getScale(this.category).items.forEach((item) => {
+        itemNames.add(item.name);
       });
     }
-    categoryNames.forEach((name) => {
-      this.categories.add(new Category(name));
+    itemNames.forEach((name) => {
+      this.items.add(new Item(name));
     });
   }
 }

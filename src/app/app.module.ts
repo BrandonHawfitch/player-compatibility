@@ -20,6 +20,8 @@ import { TableDataFormatDirective } from './table/tableDataFormat.directive';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { RankingComponent } from './preferences/ranking/ranking.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PreferenceComponent } from './preferences/preference/preference.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TableDataFormatDirective,
     PreferencesComponent,
     RankingComponent,
+    PreferenceComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     EffectsModule.forRoot([AuthEffects]),
     SharedModule,
     DragDropModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

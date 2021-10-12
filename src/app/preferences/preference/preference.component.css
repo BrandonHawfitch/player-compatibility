@@ -1,0 +1,5 @@
+div {
+  border: solid 3px #ccc;
+  border-style: groove;
+  padding: 5px;
+}

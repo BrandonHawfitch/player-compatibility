@@ -1,27 +1,27 @@
 /**
- * The qualities that can be used to analyze
+ * The categories that can be used to analyze
  */
-export enum Quality {
+export enum Category {
   genre = 'Genre',
   gameplayAspect = 'Gameplay Aspect',
 }
 
 /**
- * Any category
+ * Any scale item; anything that can possess a meaningful value on a scale
  */
-export class Category {
+export class Item {
   constructor(public name: string = '', public value: number = 0) {}
 }
 
 /**
- * Any system of defining a relation between categories
+ * Any system of defining a relation between items
  * A specific implementation of a Scale is a set of Preferences
  */
 export abstract class Scale {
-  // The quality that the categories are being compared against
-  public quality: Quality;
-  // The individual categories that possess assigned values
-  public categories: Category[] = [];
+  // The category that the items belong to
+  public category: Category;
+  // The individual items that possess assigned values
+  public items: Item[] = [];
 
   /**
    *
@@ -31,18 +31,18 @@ export abstract class Scale {
   constructor(public max: number, public min: number = 1) {}
 
   /**
-   * Returns a difference value between two categories that is calculated in relation to the scale type
+   * Returns a difference value between two items that is calculated in relation to the scale type
    * @param cat1
    * @param cat2
    */
-  public abstract getDifference(cat1: Category, cat2: Category): number;
+  public abstract getDifference(cat1: Item, cat2: Item): number;
 
   public abstract getMaxDifferenceSum(scale: Scale): number;
 
   public getDifferenceSum(scale: Scale): number {
     let sum = 0;
-    this.categories.forEach((catA: Category) => {
-      const catB: Category = scale.getCategory(catA);
+    this.items.forEach((catA: Item) => {
+      const catB: Item = scale.getItem(catA);
       if (catB) {
         sum += this.getDifference(catA, catB);
       }
@@ -55,10 +55,10 @@ export abstract class Scale {
     return 1 - this.getDifferenceSum(scale) / this.getMaxDifferenceSum(scale);
   }
 
-  public getCategory(catB: Category): Category {
+  public getItem(catB: Item): Item {
     const nameB = catB.name;
     let catX = null;
-    this.categories.forEach((catA: Category) => {
+    this.items.forEach((catA: Item) => {
       if (catA.name === nameB) {
         catX = catA;
       }
@@ -66,36 +66,36 @@ export abstract class Scale {
     return catX;
   }
 
-  public getNumberOfSharedCategories(scale: Scale): number {
-    let numCategories = 0;
-    this.categories.forEach((catA: Category) => {
-      const catB: Category = scale.getCategory(catA);
+  public getNumberOfSharedItems(scale: Scale): number {
+    let numItems = 0;
+    this.items.forEach((catA: Item) => {
+      const catB: Item = scale.getItem(catA);
       if (catB) {
-        numCategories++;
+        numItems++;
       }
     });
-    return numCategories;
+    return numItems;
   }
 
-  public addCategory(cat: Category): void {
-    this.categories.push(cat);
+  public addItem(cat: Item): void {
+    this.items.push(cat);
   }
 }
 
 export class Ranking extends Scale {
-  constructor(quality: Quality, max: number = 7) {
+  constructor(category: Category, max: number = 7) {
     super(max);
-    this.quality = quality;
+    this.category = category;
   }
 
-  public getDifference(cat1: Category, cat2: Category): number {
+  public getDifference(cat1: Item, cat2: Item): number {
     const absDif = Math.abs(cat1.value - cat2.value);
     const difRoot = Math.sqrt(absDif);
     return difRoot;
   }
 
   public getMaxDifferenceSum(scale: Ranking): number {
-    const n = this.getNumberOfSharedCategories(scale);
+    const n = this.getNumberOfSharedItems(scale);
     const maxDifSum = Math.sqrt(n * Math.floor(0.5 * n * n));
     return maxDifSum;
   }
@@ -106,18 +106,18 @@ export class Rating extends Scale {
     return this.max - this.min;
   }
 
-  constructor(quality: Quality, max: number = 7) {
+  constructor(category: Category, max: number = 7) {
     super(max);
-    this.quality = quality;
+    this.category = category;
   }
 
-  public getDifference(cat1: Category, cat2: Category): number {
+  public getDifference(cat1: Item, cat2: Item): number {
     const absDif = Math.abs(cat1.value - cat2.value);
     return absDif;
   }
 
   public getMaxDifferenceSum(scale: Rating): number {
-    const n = this.getNumberOfSharedCategories(scale);
+    const n = this.getNumberOfSharedItems(scale);
     const maxDifSum = n * this.maxDifference;
     return maxDifSum;
   }

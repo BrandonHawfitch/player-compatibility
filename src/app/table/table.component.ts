@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Player } from '../entities/player';
-import { Quality } from '../entities/preferences';
+import { Category } from '../entities/preferences';
 
 @Component({
   selector: 'app-table',

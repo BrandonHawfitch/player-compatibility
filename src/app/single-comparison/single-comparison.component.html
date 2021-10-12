@@ -34,17 +34,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let category of categories">
-      <th>{{ category.name }}</th>
+    <tr *ngFor="let item of items">
+      <th>{{ item.name }}</th>
       <td>
-        {{
-          playerA ? playerA.getScale(quality).getCategory(category).value : ""
-        }}
+        {{ playerA ? playerA.getScale(category).getItem(item).value : "" }}
       </td>
       <td>
-        {{
-          playerB ? playerB.getScale(quality).getCategory(category).value : ""
-        }}
+        {{ playerB ? playerB.getScale(category).getItem(item).value : "" }}
       </td>
     </tr>
   </tbody>

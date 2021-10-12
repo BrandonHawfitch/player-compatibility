@@ -1,13 +1,13 @@
-import { Quality, Ranking, Rating, Scale } from './preferences';
+import { Category, Ranking, Rating, Scale } from './preferences';
 
 export class Player {
   public preferences: Scale[] = [];
 
   constructor(public name: string) {}
 
-  public getCompatibilityScore(quality: Quality, playerB: Player): number {
-    const scaleA = this.getScale(quality);
-    const scaleB = playerB.getScale(quality);
+  public getCompatibilityScore(category: Category, playerB: Player): number {
+    const scaleA = this.getScale(category);
+    const scaleB = playerB.getScale(category);
     if (scaleA && scaleB) {
       return scaleA.getCompatibility(scaleB);
     }
@@ -15,22 +15,22 @@ export class Player {
   }
 
   public static getCompatibilityScore(
-    quality: Quality,
+    category: Category,
     playerA: Player,
     playerB: Player
   ): number {
-    const scaleA = playerA.getScale(quality);
-    const scaleB = playerB.getScale(quality);
+    const scaleA = playerA.getScale(category);
+    const scaleB = playerB.getScale(category);
     if (scaleA && scaleB) {
       return scaleA.getCompatibility(scaleB);
     }
     return null;
   }
 
-  public getScale(quality: Quality): Scale {
+  public getScale(category: Category): Scale {
     let result = null;
     this.preferences.forEach((scale: Scale) => {
-      if (quality === scale.quality) {
+      if (category === scale.category) {
         result = scale;
       }
     });
@@ -40,9 +40,9 @@ export class Player {
   public getCumulativeCompatibilityScore(playerB: Player): number {
     let totalCompat = 0;
     this.preferences.forEach((scale) => {
-      const quality = scale.quality;
-      const scaleA = this.getScale(quality);
-      const scaleB = playerB.getScale(quality);
+      const category = scale.category;
+      const scaleA = this.getScale(category);
+      const scaleB = playerB.getScale(category);
       if (scaleA && scaleB) {
         totalCompat +=
           scaleA.getCompatibility(scaleB) / this.preferences.length;
@@ -57,9 +57,9 @@ export class Player {
   ): number {
     let totalCompat = 0;
     playerA.preferences.forEach((scale) => {
-      const quality = scale.quality;
-      const scaleA = playerA.getScale(quality);
-      const scaleB = playerB.getScale(quality);
+      const category = scale.category;
+      const scaleA = playerA.getScale(category);
+      const scaleB = playerB.getScale(category);
       if (scaleA && scaleB) {
         totalCompat +=
           scaleA.getCompatibility(scaleB) / playerA.preferences.length;

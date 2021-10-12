@@ -1,15 +1,15 @@
-<div class="row" *ngFor="let quality of qualities">
+<div class="row" *ngFor="let category of categories">
   <div class="col-md-6">
     <app-single-comparison
       [players]="players"
-      [quality]="quality"
+      [category]="category"
     ></app-single-comparison>
   </div>
   <div class="col-md-6">
     <app-table
       [players]="players"
-      [comparison]="getComparison(quality)"
-      [title]="quality + ' Compatibility'"
+      [comparison]="getComparison(category)"
+      [title]="category + ' Compatibility'"
     ></app-table>
   </div>
 </div>
