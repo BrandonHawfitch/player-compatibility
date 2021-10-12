@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Item } from 'src/app/entities/preferences';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+} from '@angular/forms';
+import { Item, Ranking } from 'src/app/entities/preferences';
 
 @Component({
   selector: 'app-ranking',
@@ -15,16 +21,10 @@ import { Item } from 'src/app/entities/preferences';
     },
   ],
 })
-export class RankingComponent implements ControlValueAccessor {
-  items = [
-    'Acting',
-    'Exploring',
-    'Instigating',
-    'Fighting',
-    'Optimizing',
-    'Problem Solving',
-    'Storytelling',
-  ];
+export class RankingComponent implements ControlValueAccessor, Validator {
+  ranking: Ranking;
+
+  items: Item[];
 
   onChange = (items) => {};
 
@@ -35,13 +35,7 @@ export class RankingComponent implements ControlValueAccessor {
   disabled = false;
 
   writeValue(items: Item[]): void {
-    if (items && items[1]) {
-      let temp = [];
-      for (const item of items) {
-        temp[item.value - 1] = item.name;
-      }
-      this.items = temp;
-    }
+    this.items = items;
   }
 
   registerOnChange(onChange: any): void {
@@ -56,12 +50,21 @@ export class RankingComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
+  validate(control: AbstractControl): ValidationErrors | null {
+    const items = control.value;
+
+    throw new Error('Method not implemented.');
+  }
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-    if (event.previousIndex !== event.currentIndex && !this.touched) {
-      this.touched = true;
-      this.onTouched();
+    const modified = event.previousIndex !== event.currentIndex;
+    if (modified) {
+      this.onChange(this.items);
+      if (!this.touched) {
+        this.touched = true;
+        this.onTouched();
+      }
     }
-    this.onChange(this.items);
   }
 }
